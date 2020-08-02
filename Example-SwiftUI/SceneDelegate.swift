@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DataContainerKey: EnvironmentKey {
     static var defaultValue: DataContainer = {
-        let connection = Connection(type: .inMemory,
+        let connection = Connection(type: .sql,
                                     name: "Crush-Example-SwiftUI",
                                     version: CurrentSchema())
         return try! DataContainer(connection: connection)
