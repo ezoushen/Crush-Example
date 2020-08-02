@@ -12,13 +12,12 @@ import Foundation
 class V1: SchemaOrigin {
     override var entities: [Entity.Type] {
         [
-            V1.Record.self,
             V1.TodoList.self,
             V1.Todo.self
         ]
     }
     
-    class Record: AbstractEntityObject {
+    class Record: EntityObject {
         @Value.String
         var name: String! = ""
     }
@@ -48,3 +47,10 @@ class V1: SchemaOrigin {
 
 typealias CurrentSchema = V1
 typealias Todo = CurrentSchema.Todo
+
+extension Todo {
+    class Constraint: NSObject, ConstraintSet {
+        @FetchIndex
+        var name = AscendingIndex(\Todo.$name)
+    }
+}
