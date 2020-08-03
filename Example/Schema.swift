@@ -46,11 +46,21 @@ class V1: SchemaOrigin {
 }
 
 typealias CurrentSchema = V1
+
 typealias Todo = CurrentSchema.Todo
+typealias TodoList = CurrentSchema.TodoList
+typealias Record = CurrentSchema.Record
+
+extension Record {
+    class Constraint: NSObject, ConstraintSet {
+        @FetchIndex
+        var name = AscendingIndex(\Record.$name)
+    }
+}
 
 extension Todo {
     class Constraint: NSObject, ConstraintSet {
         @FetchIndex
-        var name = AscendingIndex(\Todo.$name)
+        var memo = AscendingIndex(\Todo.$memo)
     }
 }
