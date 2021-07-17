@@ -9,7 +9,7 @@
 import UIKit
 import Crush
 
-protocol TodoViewDelegate: class {
+protocol TodoViewDelegate: AnyObject {
     func didCancelModification(type: TodoEditMode, todo: Todo.ReadOnly)
     func didSaveModification(type: TodoEditMode, todo: Todo.ReadOnly)
 }

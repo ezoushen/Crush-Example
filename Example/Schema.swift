@@ -18,21 +18,21 @@ class V1: SchemaOrigin {
     }
     
     class Record: EntityObject {
-        @Value.String
+        @Value.String("name")
         var name: String! = ""
     }
     
     class Todo: Record {
-        @Value.String
+        @Value.String("content")
         var content: String!
         
-        @Value.Bool
+        @Value.Bool("isFinished")
         var isFinished: Bool! = false
         
-        @Optional.Value.Date
+        @Optional.Value.Date("dueDate")
         var dueDate: Date?
         
-        @Optional.Value.String
+        @Optional.Value.String("memo")
         var memo: String?
         
         override func awakeFromInsert() {
@@ -54,13 +54,13 @@ typealias Record = CurrentSchema.Record
 extension Record {
     class Constraint: NSObject, ConstraintSet {
         @FetchIndex
-        var name = AscendingIndex(\Record.$name)
+        var name = AscendingIndex(\Record.name)
     }
 }
 
 extension Todo {
     class Constraint: NSObject, ConstraintSet {
         @FetchIndex
-        var memo = AscendingIndex(\Todo.$memo)
+        var memo = AscendingIndex(\Todo.memo)
     }
 }

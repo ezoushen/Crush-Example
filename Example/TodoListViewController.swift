@@ -32,15 +32,15 @@ class TodoListViewController: UIViewController {
         super.viewDidLoad()
         DispatchQueue.main.async {
             // Load all tasks
-            self.todos = try! self.container.fetch(for: Todo.self).exec()
+            self.todos = self.container.fetch(for: Todo.self).exec()
             // Reload table view
             self.tableView.reloadData()
         }
     }
     
     @IBAction func didPressCreateButton() {
-        let todo: Todo.ReadOnly = try! container.startTransaction().sync { context -> Todo in
-            let todo = context.create(entiy: Todo.self)
+        let todo: Todo.ReadOnly = container.startTransaction().sync { context -> Todo in
+            let todo = context.create(entity: Todo.self)
             return todo
         }
         performSegue(withIdentifier: "TASK_DETAIL_VIEW",
